@@ -53,6 +53,7 @@
                     <div class="d-grid">
                         <button type="submit" class="btn btn-orange text-white">{{ __('Login') }}</button>
                     </div>
+
                     <hr>
                     {{-- <div class="text-center mt-3">
                         <a href="#" class="btn btn-light text-black mb-3">
