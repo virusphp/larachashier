@@ -346,66 +346,6 @@
 						</div>
 					</div>
 
-					<h6 class="mt-4 mb-0 fw-bold text-uppercase">
-						Topbar Color
-					</h6>
-					<p class="text-muted">
-						Choose Light or Dark Topbar Color.
-					</p>
-
-					<div class="row">
-						<div class="col-4">
-							<div class="form-check card-radio">
-								<input class="form-check-input" type="radio" name="data-topbar" id="topbar-color-light"
-									value="light" />
-								<label class="form-check-label p-0 avatar-md w-100" for="topbar-color-light">
-									<span class="d-flex gap-1 h-100">
-										<span class="flex-shrink-0">
-											<span class="bg-light d-flex h-100 flex-column gap-1 p-1">
-												<span class="d-block p-1 px-2 bg-primary-subtle rounded mb-2"></span>
-												<span class="d-block p-1 px-2 pb-0 bg-primary-subtle"></span>
-												<span class="d-block p-1 px-2 pb-0 bg-primary-subtle"></span>
-												<span class="d-block p-1 px-2 pb-0 bg-primary-subtle"></span>
-											</span>
-										</span>
-										<span class="flex-grow-1">
-											<span class="d-flex h-100 flex-column">
-												<span class="bg-light d-block p-1"></span>
-												<span class="bg-light d-block p-1 mt-auto"></span>
-											</span>
-										</span>
-									</span>
-								</label>
-							</div>
-							<h5 class="fs-13 text-center mt-2">Light</h5>
-						</div>
-						<div class="col-4">
-							<div class="form-check card-radio">
-								<input class="form-check-input" type="radio" name="data-topbar" id="topbar-color-dark"
-									value="dark" />
-								<label class="form-check-label p-0 avatar-md w-100" for="topbar-color-dark">
-									<span class="d-flex gap-1 h-100">
-										<span class="flex-shrink-0">
-											<span class="bg-light d-flex h-100 flex-column gap-1 p-1">
-												<span class="d-block p-1 px-2 bg-primary-subtle rounded mb-2"></span>
-												<span class="d-block p-1 px-2 pb-0 bg-primary-subtle"></span>
-												<span class="d-block p-1 px-2 pb-0 bg-primary-subtle"></span>
-												<span class="d-block p-1 px-2 pb-0 bg-primary-subtle"></span>
-											</span>
-										</span>
-										<span class="flex-grow-1">
-											<span class="d-flex h-100 flex-column">
-												<span class="bg-primary d-block p-1"></span>
-												<span class="bg-light d-block p-1 mt-auto"></span>
-											</span>
-										</span>
-									</span>
-								</label>
-							</div>
-							<h5 class="fs-13 text-center mt-2">Dark</h5>
-						</div>
-					</div>
-
 
 					<div id="sidebar-img">
 						<h6 class="mt-4 mb-0 fw-bold text-uppercase">
