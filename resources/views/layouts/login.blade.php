@@ -8,7 +8,10 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>{{ config('app.name', 'Laravel') }}</title>
-    <link href="{{ asset('img/favicon.ico') }}" rel="icon" type="image/png">
+    {{--
+    <link href="{{ asset('img/favicon.ico') }}" rel="icon" type="image/png"> --}}
+    <link href="{{ asset('img/favicon.png') }}" rel="icon" type="image/png">
+
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
