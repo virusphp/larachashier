@@ -92,35 +92,14 @@
 		</div>
 	</div>
 
-	{{-- <div class="customizer-setting d-none d-md-block">
-		<div class="btn-info rounded-pill shadow-lg btn btn-icon btn-lg p-2" data-bs-toggle="offcanvas"
-			data-bs-target="#theme-settings-offcanvas" aria-controls="theme-settings-offcanvas">
-			<i class="mdi mdi-spin mdi-cog-outline fs-22"></i>
-		</div>
-	</div> --}}
-
-	<!-- Theme Settings -->
-	{{-- @include('layouts.partials.themes') --}}
-
-
 	<!-- JAVASCRIPT -->
 	<script src="{{ asset('themes/libs/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
-	{{-- <script src="{{ asset('themes/libs/simplebar/simplebar.min.js') }}"></script> --}}
-	{{-- <script src="{{ asset('themes/libs/node-waves/waves.min.js') }}"></script> --}}
 	<script src="{{ asset('themes/libs/feather-icons/feather.min.js') }}"></script>
 	<script src="{{ asset('themes/js/pages/plugins/lord-icon-2.1.0.js') }}"></script>
-	{{-- <script src="{{ asset('themes/js/plugins.js') }}"></script> --}}
 
-	<!-- apexcharts -->
-	{{-- <script src="{{ asset('themes/libs/apexcharts/apexcharts.min.js')  }}">
-		--}}
 	</script>
 
-	<!-- projects js -->
-	{{-- <script src="{{ asset('themes/js/pages/dashboard-projects.init.js') }}"></script> --}}
 
-	<!-- App js -->
-	{{-- <script src="{{ asset('themes/js/app.js') }}"></script> --}}
 </body>
 
 </html>

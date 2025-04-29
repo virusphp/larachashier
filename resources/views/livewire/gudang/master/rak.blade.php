@@ -10,7 +10,8 @@
                                 placeholder="Search for Fruits..." wire:model.live="search">
                         </div>
                         <div class="col">
-                            <a href="#" class="btn btn-sm btn-success float-end"><i class="bx bx-plus"></i>
+                            <a wire:navigate href="/gudang/rak/create" class="btn btn-sm btn-success float-end"><i
+                                    class="bx bx-plus"></i>
                                 Tambah</a>
                         </div>
                     </div>
@@ -35,8 +36,8 @@
                                                 <td>{{ $loop->iteration }}</td>
                                                 <td>{{ $rak->nama_rak }}</td>
                                                 <td>
-                                                    <a href="#" class="btn btn-sm btn-warning"><i
-                                                            class="bx bx-edit"></i></a>
+                                                    <a wire:navigate href="/gudang/rak/{{ $rak->no  }}/edit"
+                                                        class="btn btn-sm btn-warning"><i class="bx bx-edit"></i></a>
                                                     <button type="button" class="btn btn-sm btn-danger"
                                                         wire:click="delete({{ $rak->id }})"><i
                                                             class="bx bx-trash"></i></button>

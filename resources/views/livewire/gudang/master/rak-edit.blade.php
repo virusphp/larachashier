@@ -6,7 +6,9 @@
             </div><!-- end card header -->
             <div class="card-body">
                 <div class="live-preview">
-                    <form wire:submit="store">
+                    <form wire:submit="update">
+                        @csrf
+                        @method('put')
                         <div class="row mb-3">
                             <div class="col-lg-3">
                                 <label for="nama_rak" class="form-label">Nama Rak</label>
@@ -17,7 +19,7 @@
                             </div>
                         </div>
                         <div class="text-end">
-                            <button type="submit" class="btn btn-primary">Simpan</button>
+                            <button type="submit" class="btn btn-warning">Update</button>
                         </div>
                     </form>
                 </div>
