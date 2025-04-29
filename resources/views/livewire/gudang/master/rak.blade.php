@@ -3,13 +3,15 @@
         <div class="col-lg-12">
             <div class="card">
                 <div class="card-header align-items-center d-flex">
-                    <h4 class="card-title mb-0 flex-grow-1">Kategori</h4>
-                    <div class="flex-shrink-0">
-                        <div class="autoComplete_wrapper" role="combobox" aria-owns="autoComplete_list_1"
-                            aria-haspopup="true" aria-expanded="false">
-                            <input id="autoCompleteFruit" type="text" dir="ltr" spellcheck="false" autocomplete="off"
-                                autocapitalize="off" aria-controls="autoComplete_list_1" aria-autocomplete="both"
+                    <h4 class="card-title mb-0 flex-grow-1">Rak</h4>
+                    <div class="flex-shrink-0 row g-2">
+                        <div class="col">
+                            <input class="form-control form-control-sm float-end" type="text"
                                 placeholder="Search for Fruits..." wire:model.live="search">
+                        </div>
+                        <div class="col">
+                            <a href="#" class="btn btn-sm btn-success float-end"><i class="bx bx-plus"></i>
+                                Tambah</a>
                         </div>
                     </div>
                 </div><!-- end card header -->
@@ -24,25 +26,27 @@
                                             <tr>
                                                 <th scope="col">No</th>
                                                 <th scope="col">Nama</th>
-                                                <th scope="col">Email</th>
-                                                <th scope="col">Role</th>
-                                                <th scope="col">Created At</th>
+                                                <th scope="col">Aksi</th>
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            @foreach($users as $user)
+                                            @foreach($dataRak as $rak)
                                             <tr>
                                                 <td>{{ $loop->iteration }}</td>
-                                                <td>{{ $user->name }}</td>
-                                                <td>{{ $user->email }}</td>
-                                                <td>{{ $user->role }}</td>
-                                                <td>{{ $user->created_at }}</td>
+                                                <td>{{ $rak->nama_rak }}</td>
+                                                <td>
+                                                    <a href="#" class="btn btn-sm btn-warning"><i
+                                                            class="bx bx-edit"></i></a>
+                                                    <button type="button" class="btn btn-sm btn-danger"
+                                                        wire:click="delete({{ $rak->id }})"><i
+                                                            class="bx bx-trash"></i></button>
+                                                </td>
                                             </tr>
                                             @endforeach
                                         </tbody>
                                     </table>
 
-                                    {{ $users->links() }}
+                                    {{ $dataRak->links() }}
                                 </div>
                             </div>
                             <!--end col-->

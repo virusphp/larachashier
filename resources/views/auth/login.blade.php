@@ -8,12 +8,11 @@
 
         <div class="card">
             <div class="card-body p-4 p-sm-6">
-                <div class="text-center mb-3">
+                <div class="text-center mb-4">
                     @if(env('APP_NAME') == "KRATON")
                     <img id="change-photo" class="profile-img" src="{{ asset('img/logo.png') }}">
                     @else
-                    <img id="change-photo" class="profile-img" width="100" height="100"
-                        src="{{ asset('img/logo_megono.png') }}">
+                    <img id="change-photo" class="profile-img" width="100" src="{{ asset('img/logo.png') }}">
                     @endif
                     <span class="fs-light">Masuk untuk lanjut ke Aplikasi SMP</span>
                 </div>
@@ -21,11 +20,11 @@
                 <form method="POST" action="{{ route('login') }}">
                     @csrf
                     <div class="form-floating mb-3">
-                        <input type="text" id="email" name="email"
-                            class="form-control  @error('email') is-invalid @enderror" placeholder="Email"
-                            value="{{ old('email') }}" required autocomplete="emamil" autofocus>
-                        <label for="floatingInput">Email</label>
-                        @error('email')
+                        <input type="text" id="username" name="username"
+                            class="form-control  @error('username') is-invalid @enderror" placeholder="Username"
+                            value="{{ old('username') }}" required autocomplete="username" autofocus>
+                        <label for="floatingInput">Username</label>
+                        @error('username')
                         <span class="invalid-feedback" role="alert">
                             <strong>{{ $message }}</strong>
                         </span>

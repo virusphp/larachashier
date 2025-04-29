@@ -33,7 +33,7 @@
 					<span data-key="t-menu">Menu</span>
 				</li>
 				<li class="nav-item">
-					<a class="nav-link" href="{{ route('admin.dashboard')  }}" role="button" aria-expanded="false"
+					<a class="nav-link" href="{{ route('dashboard')  }}" role="button" aria-expanded="false"
 						aria-controls="sidebarDashboards">
 						<i class="bx bxs-dashboard"></i>
 						<span data-key="t-dashboards">Dashboards</span>
@@ -49,8 +49,8 @@
 					<div class="collapse menu-dropdown" id="sidebarApps">
 						<ul class="nav nav-sm flex-column">
 							<li class="nav-item">
-								<a href="{{ route('admin.categories.index')  }}" class="nav-link">
-									Kategori
+								<a href="{{ route('gudang.rak.index')  }}" class="nav-link">
+									Rak
 								</a>
 							</li>
 
