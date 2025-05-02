@@ -55,8 +55,8 @@
 							</li>
 
 							<li class="nav-item">
-								<a href="apps-todo.html" class="nav-link">
-									Produk
+								<a href="{{ route('gudang.unit-bagian.index')  }}" class="nav-link">
+									Unit Bagian
 								</a>
 							</li>
 						</ul>

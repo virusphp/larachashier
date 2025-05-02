@@ -24,6 +24,9 @@
     <link href="{{ asset('themes/css/app.min.css') }}" rel="stylesheet" type="text/css" />
     <!-- custom Css-->
     <link href="{{ asset('themes/css/custom.min.css') }}" rel="stylesheet" type="text/css" />
+
+    <link href="{{ asset('themes/libs/sweetalert2/sweetalert2.min.css') }}" rel="stylesheet" type="text/css" />
+
     @livewireStyles
 </head>
 
@@ -91,12 +94,14 @@
         </div>
     </div>
 
+    @livewireScripts
     <!-- JAVASCRIPT -->
     <script src="{{ asset('themes/libs/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
     <script src="{{ asset('themes/libs/feather-icons/feather.min.js') }}"></script>
     <script src="{{ asset('themes/js/pages/plugins/lord-icon-2.1.0.js') }}"></script>
+    <script src="{{ asset('themes/libs/sweetalert2/sweetalert2.all.min.js') }}"></script>
 
-    </script>
+    @stack('scripts')
 
 
 </body>

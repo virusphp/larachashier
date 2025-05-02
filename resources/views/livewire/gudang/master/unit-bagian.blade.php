@@ -1,7 +1,7 @@
 <div>
-    @section('sub_title', 'Data Rak')
+    @section('sub_title', 'Data Unit Bagian')
     @section('sub_menu', 'Master')
-    @section('menu_active', 'rak')
+    @section('menu_active', 'unit-bagian')
 
 
     @if($isTableMode === true)
@@ -19,7 +19,7 @@
         <div class="col-lg-12">
             <div class="card">
                 <div class="card-header align-items-center d-flex">
-                    <h4 class="card-title mb-0 flex-grow-1">Rak</h4>
+                    <h4 class="card-title mb-0 flex-grow-1">Unit bagian</h4>
                     <div class="flex-shrink-0 row g-2">
                         <div class="col">
                             <input class="form-control form-control-sm float-end" type="text" placeholder="Searchs..."
@@ -42,6 +42,7 @@
                                         <thead>
                                             <tr>
                                                 <th scope="col">No</th>
+                                                <th scope="col">Kode</th>
                                                 <th scope="col">Nama</th>
                                                 <th scope="col">Aksi</th>
                                             </tr>
@@ -49,17 +50,19 @@
                                         <tbody>
                                             {{--
                                             <pre>{{ dd($raks) }}</pre> --}}
-                                            @if($raks && $raks->count())
-                                            @foreach($raks as $rak)
+                                            @if($units && $units->count())
+                                            @foreach($units as $item)
                                             <tr>
-                                                <td wire:key="item-{{ $rak->no }}">{{ $loop->iteration }}</td>
-                                                <td>{{ $rak->nama_rak }}</td>
+                                                <td wire:key="item-{{ $item->no }}">{{ $loop->iteration }}</td>
+                                                <td>{{ trim($item->kode_bagian) }}</td>
+                                                <td>{{ $item->nama_bagian }}</td>
                                                 <td>
-                                                    <button type="button" wire:click="edit({{ $rak->no }})"
+                                                    <button type="button"
+                                                        wire:click="edit('{{ trim($item->kode_bagian) }}')"
                                                         class="btn btn-sm btn-warning"><i
                                                             class="bx bx-edit"></i></button>
                                                     <button type="button" class="btn btn-sm btn-danger"
-                                                        wire:click.prevent="deleteConfirmation({{ $rak->no }})"><i
+                                                        wire:click.prevent="deleteConfirmation('{{ $item->kode_bagian }}')"><i
                                                             class="bx bx-trash"></i></button>
                                                 </td>
                                             </tr>
@@ -68,7 +71,7 @@
                                         </tbody>
                                     </table>
 
-                                    {{-- {{ $raks->links() }} --}}
+                                    {{ $units->links() }}
                                 </div>
                             </div>
                             <!--end col-->
@@ -90,20 +93,21 @@
             <div class="card">
                 <div class="card-header align-items-center d-flex">
                     {{-- {{ dd($dataRak, $noid, $nama_rak) }} --}}
-                    <h4 class="card-title mb-0 flex-grow-1">Form {{ !empty($noid) ? "Edit" : "Tambah" }} Rak</h4>
+                    <h4 class="card-title mb-0 flex-grow-1">Form {{ !empty($kode_bagian) ? "Edit" : "Tambah" }} Unit
+                        Bagian</h4>
                 </div><!-- end card header -->
                 <div class="card-body">
                     <div class="live-preview">
-                        <form wire:submit="{{ !empty($noid) ? 'update('.$noid.')' : 'store()' }}">
+                        <form wire:submit="{{ !empty($kode_bagian) ? 'update("'.trim($kode_bagian).'")' : 'store()' }}">
                             <div class="row mb-3">
                                 <div class="col-lg-3">
-                                    <label for="nama_rak" class="form-label">Nama Rak</label>
+                                    <label for="nama_bagian" class="form-label">Nama Rak</label>
                                 </div>
                                 <div class="col-lg-9">
-                                    <input type="text" class="form-control @error('nama_rak') is-invalid @enderror"
-                                        id="nama_rak" name="nama_rak" placeholder="Nama rak" wire:model="nama_rak"
-                                        autofocus>
-                                    @error('nama_rak')
+                                    <input type="text" class="form-control @error('nama_bagian') is-invalid @enderror"
+                                        id="nama_bagian" name="nama_rak" placeholder="Nama bagian"
+                                        wire:model="nama_bagian" autofocus>
+                                    @error('nama_bagian')
                                     <div class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </div>
@@ -113,7 +117,8 @@
                             </div>
                             <div class="text-end">
                                 <button wire:click="tableMode()" type="button" class="btn btn-info">Kembali</button>
-                                <button class="btn btn-{{ !empty($noid) ? 'warning' : 'primary' }}">{{ !empty($noid)
+                                <button class="btn btn-{{ !empty($kode_bagian) ? 'warning' : 'primary' }}">{{
+                                    !empty($kode_bagian)
                                     ?"Update" : "Simpan" }}</button>
                             </div>
                         </form>
@@ -146,7 +151,7 @@
             })
         });
 
-        window.addEventListener('rakDeleted', event => {
+        window.addEventListener('unitDeleted', event => {
             Swal.fire(
                 'Terhapus!',
                 'Data telah dihapus.',
