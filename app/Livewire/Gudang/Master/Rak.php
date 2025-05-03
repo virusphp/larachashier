@@ -9,7 +9,6 @@ use Livewire\Attributes\On;
 
 class Rak extends Component
 {
-
     use WithPagination;
     protected $paginationTheme = 'bootstrap';
 

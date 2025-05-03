@@ -1,7 +1,10 @@
 <?php
 
 use App\Livewire\Dashboard;
+use App\Livewire\Gudang\Master\JenisBarang;
+use App\Livewire\Gudang\Master\KelompokBarang;
 use App\Livewire\Gudang\Master\Rak;
+use App\Livewire\Gudang\Master\Satuan;
 use App\Livewire\Gudang\Master\UnitBagian;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -21,8 +24,10 @@ Route::group(['middleware' => 'auth'], function () {
     Route::group(['prefix' => 'gudang', 'as' => 'gudang.', 'middleware' => 'auth'], function () {
         Route::group(['namespace' => 'App\Livewire\Gudang\Master'], function () {
             Route::get('rak', Rak::class)->name('rak.index');
-
             Route::get('unit-bagian', UnitBagian::class)->name('unit-bagian.index');
+            Route::get('satuan', Satuan::class)->name('satuan.index');
+            Route::get('jenis-barang', JenisBarang::class)->name('jenis-barang.index');
+            Route::get('kelompok-barang', KelompokBarang::class)->name('kelompok-barang.index');
         });
     });
 });

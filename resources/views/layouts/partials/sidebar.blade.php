@@ -59,6 +59,23 @@
 									Unit Bagian
 								</a>
 							</li>
+
+							<li class="nav-item">
+								<a href="{{ route('gudang.satuan.index')  }}" class="nav-link">
+									Satuan
+								</a>
+							</li>
+
+							<li class="nav-item">
+								<a href="{{ route('gudang.jenis-barang.index')  }}" class="nav-link">
+									Jenis Barang
+								</a>
+							</li>
+							<li class="nav-item">
+								<a href="{{ route('gudang.kelompok-barang.index')  }}" class="nav-link">
+									Kelompok Barang
+								</a>
+							</li>
 						</ul>
 					</div>
 				</li>

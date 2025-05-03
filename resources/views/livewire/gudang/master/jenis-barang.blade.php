@@ -1,7 +1,7 @@
 <div>
-    @section('sub_title', 'Data Unit Bagian')
+    @section('sub_title', 'Data Jenis Barang')
     @section('sub_menu', 'Master')
-    @section('menu_active', 'unit-bagian')
+    @section('menu_active', 'jenis-barang')
 
 
     @if($isTableMode === true)
@@ -19,7 +19,7 @@
         <div class="col-lg-12">
             <div class="card">
                 <div class="card-header align-items-center d-flex">
-                    <h4 class="card-title mb-0 flex-grow-1">Unit bagian</h4>
+                    <h4 class="card-title mb-0 flex-grow-1">Jenis Barang</h4>
                     <div class="flex-shrink-0 row g-2">
                         <div class="col">
                             <input class="form-control form-control-sm float-end" type="text" placeholder="Searchs..."
@@ -41,32 +41,30 @@
                                     <table class="table table-hover align-middle table-nowrap mb-0">
                                         <thead>
                                             <tr>
-                                                <th scope="col">No</th>
                                                 <th scope="col">Kode</th>
                                                 <th scope="col">Nama</th>
-                                                <th scope="col">Status Apotik</th>
+                                                <th scope="col">Status</th>
                                                 <th scope="col">Aksi</th>
                                             </tr>
                                         </thead>
                                         <tbody>
                                             {{--
-                                            <pre>{{ dd($raks) }}</pre> --}}
-                                            @if($units && $units->count())
-                                            @foreach($units as $item)
+                                            <pre>{{ dd($jenisBarangs) }}</pre> --}}
+                                            @if($jenisBarangs && $jenisBarangs->count())
+                                            @foreach($jenisBarangs as $jenisBarang)
                                             <tr>
-                                                <td wire:key="item-{{ $item->no }}">{{ $loop->iteration }}</td>
-                                                <td>{{ trim($item->kode_bagian) }}</td>
-                                                <td>{{ $item->nama_bagian }}</td>
-                                                <td>{!! $item->status_apotik == 1 ? '<i
-                                                        class="bg-success text-white bx bx-check"></i>' :
-                                                    '<i class="bg-secondary text-white bx bx-x"></id>' !!}</td>
+                                                <td>{{ $jenisBarang->kode_jenis_obat }}</td>
+                                                <td>{{ $jenisBarang->nama_jenis_obat }}</td>
+                                                <td>{!! $jenisBarang->status == 1 ? '<i
+                                                        class="bg-success text-white bx bx-check"></i>' : '<i
+                                                        class="bg-secondary text-white bx bx-x"></i>' !!}</td>
                                                 <td>
                                                     <button type="button"
-                                                        wire:click="edit('{{ trim($item->kode_bagian) }}')"
+                                                        wire:click="edit({{ $jenisBarang->kode_jenis_obat }})"
                                                         class="btn btn-sm btn-warning"><i
                                                             class="bx bx-edit"></i></button>
                                                     <button type="button" class="btn btn-sm btn-danger"
-                                                        wire:click.prevent="deleteConfirmation('{{ $item->kode_bagian }}')"><i
+                                                        wire:click.prevent="deleteConfirmation({{ $jenisBarang->kode_jenis_obat }})"><i
                                                             class="bx bx-trash"></i></button>
                                                 </td>
                                             </tr>
@@ -75,7 +73,7 @@
                                         </tbody>
                                     </table>
 
-                                    {{ $units->links() }}
+                                    {{ $jenisBarangs->links() }}
                                 </div>
                             </div>
                             <!--end col-->
@@ -96,22 +94,24 @@
         <div class="col-xxl-6 col-sm-12">
             <div class="card">
                 <div class="card-header align-items-center d-flex">
-                    {{-- {{ dd($dataRak, $noid, $nama_rak) }} --}}
-                    <h4 class="card-title mb-0 flex-grow-1">Form {{ !empty($kode_bagian) ? "Edit" : "Tambah" }} Unit
-                        Bagian</h4>
+                    {{-- {{ dd($datajenisBarang, $noid, $nama_jenisBarang) }} --}}
+                    <h4 class="card-title mb-0 flex-grow-1">Form {{ !empty($kode_jenis_obat) ? "Edit" : "Tambah" }}
+                        Jenis Barang
+                    </h4>
                 </div><!-- end card header -->
                 <div class="card-body">
                     <div class="live-preview">
-                        <form wire:submit="{{ !empty($kode_bagian) ? 'update("'.trim($kode_bagian).'")' : 'store()' }}">
+                        <form wire:submit="{{ !empty($kode_jenis_obat) ? 'update('.$kode_jenis_obat.')' : 'store()' }}">
                             <div class="row mb-3">
                                 <div class="col-lg-3">
-                                    <label for="nama_bagian" class="form-label">Nama Rak</label>
+                                    <label for="nama_jenisBarang" class="form-label">Nama Jenis Barang</label>
                                 </div>
                                 <div class="col-lg-9">
-                                    <input type="text" class="form-control @error('nama_bagian') is-invalid @enderror"
-                                        id="nama_bagian" name="nama_rak" placeholder="Nama bagian"
-                                        wire:model="nama_bagian" autofocus>
-                                    @error('nama_bagian')
+                                    <input type="text"
+                                        class="form-control @error('nama_jenis_obat') is-invalid @enderror"
+                                        id="nama_jenis_obat" name="nama_jenis_obat" placeholder="Nama jenis barang"
+                                        wire:model="nama_jenis_obat" autofocus>
+                                    @error('nama_jenis_obat')
                                     <div class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </div>
@@ -121,8 +121,8 @@
                             </div>
                             <div class="text-end">
                                 <button wire:click="tableMode()" type="button" class="btn btn-info">Kembali</button>
-                                <button class="btn btn-{{ !empty($kode_bagian) ? 'warning' : 'primary' }}">{{
-                                    !empty($kode_bagian)
+                                <button class="btn btn-{{ !empty($kode_jenis_obat) ? 'warning' : 'primary' }}">{{
+                                    !empty($kode_jenis_obat)
                                     ?"Update" : "Simpan" }}</button>
                             </div>
                         </form>
@@ -149,13 +149,12 @@
                 confirmButtonText: 'Ya, hapus!'
             }).then((result) => {
                 if (result.isConfirmed) {
-                    // console.log(result.isConfirmed);
                    window.Livewire.dispatch('deleteConfirmed');
                 }
             })
         });
 
-        window.addEventListener('unitDeleted', event => {
+        window.addEventListener('jenisBarangDeleted', event => {
             Swal.fire(
                 'Terhapus!',
                 'Data telah dihapus.',

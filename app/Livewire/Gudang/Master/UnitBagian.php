@@ -12,7 +12,6 @@ class UnitBagian extends Component
     use WithPagination;
     protected $paginationTheme = 'bootstrap';
 
-
     public bool $isTableMode = true;
     public $search = '';
     public $kode_bagian;
@@ -31,7 +30,7 @@ class UnitBagian extends Component
 
     public function getUnits()
     {
-        return Unit::select('kdbagian as kode_bagian', 'nmbagian as nama_bagian', 'status_apotik')->where('nmbagian', 'like', '%' . $this->search . '%')->paginate(25);
+        return Unit::select('kdbagian as kode_bagian', 'nmbagian as nama_bagian', 'status_apotik')->whereNotNull('status_apotik')->where('nmbagian', 'like', '%' . $this->search . '%')->paginate(25);
     }
 
     public function createMode()
