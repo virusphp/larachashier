@@ -15,7 +15,7 @@ class KelompokBarang extends Component
     public bool $isTableMode = true;
     public $search = '';
     public $kode_kelompok_obat;
-    public $status_aktif;
+    public $status_aktif = '1';
     public string $nama_kelompok_obat;
 
     public function updatingSearch()
@@ -68,6 +68,7 @@ class KelompokBarang extends Component
         $kelompokBarang = new GudangKelompokBarang;
         $kelompokBarang->kd_kel_obat = $this->kode_kelompok_obat;
         $kelompokBarang->kel_obat = $this->nama_kelompok_obat;
+        $kelompokBarang->stsaktif = $this->status_aktif;
         $kelompokBarang->save();
         session()->flash('message', 'Kelompok-obat created successfully.');
 

@@ -15,7 +15,7 @@ class JenisBarang extends Component
     public bool $isTableMode = true;
     public $search = '';
     public $kode_jenis_obat;
-    public $status_aktif;
+    public $status_aktif = '1';
     public string $nama_jenis_obat;
 
     public function updatingSearch()
@@ -68,6 +68,7 @@ class JenisBarang extends Component
         $jenisBarang = new GudangJenisBarang;
         $jenisBarang->kd_jns_obat = $this->kode_jenis_obat;
         $jenisBarang->jns_obat = $this->nama_jenis_obat;
+        $jenisBarang->stsaktif = $this->status_aktif;
         $jenisBarang->save();
         session()->flash('message', 'Jenis-obat created successfully.');
 

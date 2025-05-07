@@ -1,7 +1,7 @@
 <div>
-    @section('sub_title', 'Data Unit Bagian')
+    @section('sub_title', 'Data Golongan Barang')
     @section('sub_menu', 'Master')
-    @section('menu_active', 'unit-bagian')
+    @section('menu_active', 'golongan-barang')
 
 
     @if($isTableMode === true)
@@ -19,7 +19,7 @@
         <div class="col-lg-12">
             <div class="card">
                 <div class="card-header align-items-center d-flex">
-                    <h4 class="card-title mb-0 flex-grow-1">Unit bagian</h4>
+                    <h4 class="card-title mb-0 flex-grow-1">Golongan Barang</h4>
                     <div class="flex-shrink-0 row g-2">
                         <div class="col">
                             <input class="form-control form-control-sm float-end" type="text" placeholder="Searchs..."
@@ -41,32 +41,30 @@
                                     <table class="table table-hover align-middle table-nowrap mb-0">
                                         <thead>
                                             <tr>
-                                                <th scope="col">No</th>
                                                 <th scope="col">Kode</th>
                                                 <th scope="col">Nama</th>
-                                                <th scope="col">Status Apotik</th>
+                                                <th scope="col">Status</th>
                                                 <th scope="col">Aksi</th>
                                             </tr>
                                         </thead>
                                         <tbody>
                                             {{--
-                                            <pre>{{ dd($raks) }}</pre> --}}
-                                            @if($units && $units->count())
-                                            @foreach($units as $item)
+                                            <pre>{{ dd($golonganBarangs) }}</pre> --}}
+                                            @if($golonganBarangs && $golonganBarangs->count())
+                                            @foreach($golonganBarangs as $golonganBarang)
                                             <tr>
-                                                <td wire:key="item-{{ $item->no }}">{{ $loop->iteration }}</td>
-                                                <td>{{ trim($item->kode_bagian) }}</td>
-                                                <td>{{ $item->nama_bagian }}</td>
-                                                <td>{!! $item->status_apotik == 1 ? '<i
-                                                        class="bg-success text-white bx bx-check"></i>' :
-                                                    '<i class="bg-secondary text-white bx bx-x"></id>' !!}</td>
+                                                <td>{{ $golonganBarang->kode_golongan_obat }}</td>
+                                                <td>{{ $golonganBarang->nama_golongan_obat }}</td>
+                                                <td>{!! $golonganBarang->status == 1 ? '<i
+                                                        class="bg-success text-white bx bx-check"></i>' : '<i
+                                                        class="bg-secondary text-white bx bx-x"></i>' !!}</td>
                                                 <td>
                                                     <button type="button"
-                                                        wire:click="edit('{{ trim($item->kode_bagian) }}')"
+                                                        wire:click="edit({{ $golonganBarang->kode_golongan_obat }})"
                                                         class="btn btn-sm btn-warning"><i
                                                             class="bx bx-edit"></i></button>
                                                     <button type="button" class="btn btn-sm btn-danger"
-                                                        wire:click.prevent="deleteConfirmation('{{ $item->kode_bagian }}')"
+                                                        wire:click.prevent="deleteConfirmation({{ $golonganBarang->kode_golongan_obat }})"
                                                         disabled><i class="bx bx-trash"></i></button>
                                                 </td>
                                             </tr>
@@ -75,7 +73,7 @@
                                         </tbody>
                                     </table>
 
-                                    {{ $units->links() }}
+                                    {{ $golonganBarangs->links() }}
                                 </div>
                             </div>
                             <!--end col-->
@@ -96,22 +94,25 @@
         <div class="col-xxl-6 col-sm-12">
             <div class="card">
                 <div class="card-header align-items-center d-flex">
-                    {{-- {{ dd($dataRak, $noid, $nama_rak) }} --}}
-                    <h4 class="card-title mb-0 flex-grow-1">Form {{ !empty($kode_bagian) ? "Edit" : "Tambah" }} Unit
-                        Bagian</h4>
+                    {{-- {{ dd($datagolonganBarang, $noid, $nama_golonganBarang) }} --}}
+                    <h4 class="card-title mb-0 flex-grow-1">Form {{ !empty($kode_golongan_obat) ? "Edit" : "Tambah" }}
+                        Golongan Barang
+                    </h4>
                 </div><!-- end card header -->
                 <div class="card-body">
                     <div class="live-preview">
-                        <form wire:submit="{{ !empty($kode_bagian) ? 'update("'.trim($kode_bagian).'")' : 'store()' }}">
+                        <form
+                            wire:submit="{{ !empty($kode_golongan_obat) ? 'update('.$kode_golongan_obat.')' : 'store()' }}">
                             <div class="row mb-3">
                                 <div class="col-lg-3">
-                                    <label for="nama_bagian" class="form-label">Nama Rak</label>
+                                    <label for="nama_golonganBarang" class="form-label">Nama golongan Barang</label>
                                 </div>
                                 <div class="col-lg-9">
-                                    <input type="text" class="form-control @error('nama_bagian') is-invalid @enderror"
-                                        id="nama_bagian" name="nama_rak" placeholder="Nama bagian"
-                                        wire:model="nama_bagian" autofocus>
-                                    @error('nama_bagian')
+                                    <input type="text"
+                                        class="form-control @error('nama_golongan_obat') is-invalid @enderror"
+                                        id="nama_golongan_obat" name="nama_golongan_obat"
+                                        placeholder="Nama golongan barang" wire:model="nama_golongan_obat" autofocus>
+                                    @error('nama_golongan_obat')
                                     <div class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </div>
@@ -121,14 +122,13 @@
 
                             <div class="row mb-3">
                                 <div class="col-lg-3">
-                                    <label for="status_apotik" class="form-label">Status Apotik</label>
+                                    <label for="status_aktif" class="form-label">Status</label>
                                 </div>
                                 <div class="col-lg-3">
-                                    <select class="form-select @error('status_apotik') is-invalid @enderror"
-                                        wire:model="status_apotik" id="status_apotik" name="status_apotik">
-                                        <option value="1">Apotik</option>
-                                        <option value="0">Anfrah</option>
-                                        <option value="2">Laboratorium</option>
+                                    <select class="form-select @error('status_aktif') is-invalid @enderror"
+                                        wire:model="status_aktif" id="status_aktif" name="status_aktif">
+                                        <option value="1">Aktif</option>
+                                        <option value="0">Tidak Aktif</option>
                                     </select>
                                     @error('status_aktif')
                                     <div class="invalid-feedback" role="alert">
@@ -137,11 +137,10 @@
                                     @enderror
                                 </div>
                             </div>
-
                             <div class="text-end">
                                 <button wire:click="tableMode()" type="button" class="btn btn-info">Kembali</button>
-                                <button class="btn btn-{{ !empty($kode_bagian) ? 'warning' : 'primary' }}">{{
-                                    !empty($kode_bagian)
+                                <button class="btn btn-{{ !empty($kode_golongan_obat) ? 'warning' : 'primary' }}">{{
+                                    !empty($kode_golongan_obat)
                                     ?"Update" : "Simpan" }}</button>
                             </div>
                         </form>
@@ -168,13 +167,12 @@
                 confirmButtonText: 'Ya, hapus!'
             }).then((result) => {
                 if (result.isConfirmed) {
-                    // console.log(result.isConfirmed);
                    window.Livewire.dispatch('deleteConfirmed');
                 }
             })
         });
 
-        window.addEventListener('unitDeleted', event => {
+        window.addEventListener('golonganBarangDeleted', event => {
             Swal.fire(
                 'Terhapus!',
                 'Data telah dihapus.',

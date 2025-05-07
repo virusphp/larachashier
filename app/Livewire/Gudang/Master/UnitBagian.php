@@ -15,6 +15,7 @@ class UnitBagian extends Component
     public bool $isTableMode = true;
     public $search = '';
     public $kode_bagian;
+    public $status_apotik;
     public string $nama_bagian;
 
     public function updatingSearch()
@@ -77,6 +78,7 @@ class UnitBagian extends Component
         $unit = new Unit();
         $unit->kdbagian = $this->kode_bagian;
         $unit->nmbagian = $this->nama_bagian;
+        $unit->status_apotik = $this->status_apotik;
         $unit->save();
         session()->flash('message', 'Unit created successfully.');
 
@@ -88,10 +90,11 @@ class UnitBagian extends Component
     {
         // dd($id);
         $this->isTableMode = false;
-        $unit = Unit::where('kdbagian', $id)->first();
+        $unit = Unit::select('kdbagian', 'nmbagian', 'status_apotik')->where('kdbagian', $id)->first();
         if ($unit) {
             $this->kode_bagian = $unit->kdbagian;
             $this->nama_bagian = $unit->nmbagian;
+            $this->status_apotik = $unit->status_apotik;
         } else {
             session()->flash('error', 'Unit not found.');
         }
@@ -106,6 +109,7 @@ class UnitBagian extends Component
         $unit = Unit::where('kdbagian', $id)->first();
         if ($unit) {
             $unit->nmbagian = $this->nama_bagian;
+            $unit->status_apotik = $this->status_apotik;
             $unit->save();
             $this->resetForm();
             $this->isTableMode = true;

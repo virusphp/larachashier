@@ -1,10 +1,13 @@
 <?php
 
 use App\Livewire\Dashboard;
+use App\Livewire\Gudang\Master\GolonganBarang;
 use App\Livewire\Gudang\Master\JenisBarang;
 use App\Livewire\Gudang\Master\KelompokBarang;
+use App\Livewire\Gudang\Master\Pabrik;
 use App\Livewire\Gudang\Master\Rak;
 use App\Livewire\Gudang\Master\Satuan;
+use App\Livewire\Gudang\Master\Suplier;
 use App\Livewire\Gudang\Master\UnitBagian;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -28,6 +31,9 @@ Route::group(['middleware' => 'auth'], function () {
             Route::get('satuan', Satuan::class)->name('satuan.index');
             Route::get('jenis-barang', JenisBarang::class)->name('jenis-barang.index');
             Route::get('kelompok-barang', KelompokBarang::class)->name('kelompok-barang.index');
+            Route::get('golongan-barang', GolonganBarang::class)->name('golongan-barang.index');
+            Route::get('suplier', Suplier::class)->name('suplier.index');
+            Route::get('pabrik', Pabrik::class)->name('pabrik.index');
         });
     });
 });

@@ -64,8 +64,8 @@
                                                         class="btn btn-sm btn-warning"><i
                                                             class="bx bx-edit"></i></button>
                                                     <button type="button" class="btn btn-sm btn-danger"
-                                                        wire:click.prevent="deleteConfirmation({{ $kelompokBarang->kode_kelompok_obat }})"><i
-                                                            class="bx bx-trash"></i></button>
+                                                        wire:click.prevent="deleteConfirmation({{ $kelompokBarang->kode_kelompok_obat }})"
+                                                        disabled><i class="bx bx-trash"></i></button>
                                                 </td>
                                             </tr>
                                             @endforeach
@@ -118,8 +118,26 @@
                                     </div>
                                     @enderror
                                 </div>
-
                             </div>
+
+                            <div class="row mb-3">
+                                <div class="col-lg-3">
+                                    <label for="nama_jenisBarang" class="form-label">Status</label>
+                                </div>
+                                <div class="col-lg-3">
+                                    <select class="form-select @error('status_aktif') is-invalid @enderror"
+                                        wire:model="status_aktif" id="status_aktif">
+                                        <option value="1">Aktif</option>
+                                        <option value="0">Tidak Aktif</option>
+                                    </select>
+                                    @error('status_aktif')
+                                    <div class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </div>
+                                    @enderror
+                                </div>
+                            </div>
+
                             <div class="text-end">
                                 <button wire:click="tableMode()" type="button" class="btn btn-info">Kembali</button>
                                 <button class="btn btn-{{ !empty($kode_kelompok_obat) ? 'warning' : 'primary' }}">{{

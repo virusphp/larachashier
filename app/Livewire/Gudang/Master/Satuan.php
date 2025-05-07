@@ -9,7 +9,6 @@ use Livewire\WithPagination;
 
 class Satuan extends Component
 {
-
     use WithPagination;
     protected $paginationTheme = 'bootstrap';
 

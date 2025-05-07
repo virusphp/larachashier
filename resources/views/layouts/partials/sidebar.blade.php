@@ -76,6 +76,21 @@
 									Kelompok Barang
 								</a>
 							</li>
+							<li class="nav-item">
+								<a href="{{ route('gudang.golongan-barang.index')  }}" class="nav-link">
+									Golongan Barang
+								</a>
+							</li>
+							<li class="nav-item">
+								<a href="{{ route('gudang.suplier.index')  }}" class="nav-link">
+									Suplier
+								</a>
+							</li>
+							<li class="nav-item">
+								<a href="{{ route('gudang.pabrik.index')  }}" class="nav-link">
+									Pabrik
+								</a>
+							</li>
 						</ul>
 					</div>
 				</li>
