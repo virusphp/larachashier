@@ -1,6 +1,7 @@
 <?php
 
 use App\Livewire\Dashboard;
+use App\Livewire\Gudang\Master\BarangFarmasi;
 use App\Livewire\Gudang\Master\GolonganBarang;
 use App\Livewire\Gudang\Master\JenisBarang;
 use App\Livewire\Gudang\Master\KelompokBarang;
@@ -26,6 +27,7 @@ Route::group(['middleware' => 'auth'], function () {
 
     Route::group(['prefix' => 'gudang', 'as' => 'gudang.', 'middleware' => 'auth'], function () {
         Route::group(['namespace' => 'App\Livewire\Gudang\Master'], function () {
+            Route::get('barang', BarangFarmasi::class)->name('barang.index');
             Route::get('rak', Rak::class)->name('rak.index');
             Route::get('unit-bagian', UnitBagian::class)->name('unit-bagian.index');
             Route::get('satuan', Satuan::class)->name('satuan.index');

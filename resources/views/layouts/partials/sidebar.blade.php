@@ -49,6 +49,12 @@
 					<div class="collapse menu-dropdown" id="sidebarApps">
 						<ul class="nav nav-sm flex-column">
 							<li class="nav-item">
+								<a href="{{ route('gudang.barang.index')  }}" class="nav-link">
+									Barang Farmasi
+								</a>
+							</li>
+
+							<li class="nav-item">
 								<a href="{{ route('gudang.rak.index')  }}" class="nav-link">
 									Rak
 								</a>

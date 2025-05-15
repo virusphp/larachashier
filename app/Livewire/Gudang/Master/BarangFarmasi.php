@@ -3,6 +3,8 @@
 namespace App\Livewire\Gudang\Master;
 
 use App\Models\Gudang\BarangFarmasi as GudangBarangFarmasi;
+use Illuminate\Support\Facades\DB;
+use Livewire\Attributes\On;
 use Livewire\Component;
 use Livewire\WithPagination;
 
@@ -13,12 +15,10 @@ class BarangFarmasi extends Component
 
     public bool $isTableMode = true;
     public $search = '';
-    public $kode_barangFarmasi;
-    public string $nama_barangFarmasi;
-    public string $alamat;
-    public $telepon;
-    public $nama_detail;
-    public array $type_barangFarmasi = [];
+    public $filterJenisObat = null;
+    public $filterStatusBarang = '1';
+    public string $kode_barang;
+    public string $nama_barang;
 
     public function updatingSearch()
     {
@@ -28,7 +28,11 @@ class BarangFarmasi extends Component
     public function render()
     {
         $barangFarmasis = $this->getbarangFarmasis();
-        return view('livewire.gudang.master.barang-farmasi', compact('barangFarmasis'));
+        // dd($barangFarmasis, $this->filterJenisObat, $this->filterStatusBarang);
+        $jenisObat =  DB::table('jenis_obat')
+            ->select('jns_obat as jenis_obat', 'kd_jns_obat as kode_jns_obat')
+            ->where('stsaktif', 1)->get();
+        return view('livewire.gudang.master.barang-farmasi', compact('barangFarmasis', 'jenisObat'));
     }
 
     public function getbarangFarmasis()
@@ -55,70 +59,64 @@ class BarangFarmasi extends Component
                 'bf.nama_product_obat_actual',
                 'bf.stsaktif'
             )
-            // ->distinct()
-            // ->join('ap_belistok as bs', 'bf.kd_barang', 'bs.kd_barang')
-            ->where('bf.kd_jns_obat', '=', $jenis_obat)
-            ->where('bf.stsaktif', $status_barang)
-            ->where(function ($query) use ($request) {
-                if ($term = $request->term) {
+            ->when($this->filterJenisObat, function ($query) {
+                $query->where('bf.kd_jns_obat', $this->filterJenisObat);
+            })
+            ->where('bf.stsaktif', $this->filterStatusBarang)
+            ->where(function ($query) {
+                if ($term = $this->search) {
                     if (strlen($term) > 3) {
                         $keywords = $term . "%";
                         return $query->where('bf.nama_barang', 'like', $keywords);
                     }
                 }
-            })
+            })->paginate(50);
+        // dd($barangFarmasis);
     }
 
     public function createMode()
     {
         $this->isTableMode = false;
-        $this->reset(['kode_barangFarmasi', 'nama_barangFarmasi', 'alamat', 'telepon', 'nama_detail', 'type_barangFarmasi']);
+        $this->reset(['kode_barang', 'nama_barang']);
     }
 
     public function tableMode()
     {
         $this->isTableMode = true;
-        $this->reset(['kode_barangFarmasi', 'nama_barangFarmasi', 'alamat', 'telepon', 'nama_detail', 'type_barangFarmasi']);
+        $this->reset(['kode_barang', 'nama_barang']);
     }
 
     public function resetForm()
     {
-        $this->kode_barangFarmasi = null;
-        $this->nama_barangFarmasi = '';
+        $this->kode_barang = '';
+        $this->nama_barang = '';
     }
 
     public function setKode()
     {
-        $kodebarangFarmasi = "SPL";
-        $maxNo = GudangbarangFarmasi::where('kdbarangFarmasi', 'like',  $kodebarangFarmasi . '%')->max('kdbarangFarmasi');
+        $kodebarangFarmasi = "NW";
+        $maxNo = GudangbarangFarmasi::where('kode_barang', 'like',  $kodebarangFarmasi . '%')->max('kode_barang');
         if (!$maxNo) {
             $noUrut = 1;
         } else {
-            $noUrut = (int) substr($maxNo, -3);
+            $noUrut = (int) substr($maxNo, -8);
             $noUrut++;
         }
-        $autoNumber['autonumber'] = $kodebarangFarmasi . sprintf("%03s", $noUrut);
+        $autoNumber['autonumber'] = $kodebarangFarmasi . sprintf("%08s", $noUrut);
         return $autoNumber['autonumber'];
     }
 
     public function store()
     {
         $this->validate([
-            'nama_barangFarmasi' => 'required|string|max:255',
-            'nama_detail' => 'required|string|max:255',
-            'alamat' => 'required|string|max:255',
-            'telepon' => 'required|string|max:255',
+            'nama_barang' => 'required|string|max:255',
         ]);
 
-        $this->kode_barangFarmasi = $this->setKode();
+        $this->kode_barang = $this->setKode();
 
         $barangFarmasi = new GudangbarangFarmasi();
-        $barangFarmasi->kdbarangFarmasi = $this->kode_barangFarmasi;
-        $barangFarmasi->nmbarangFarmasi = $this->nama_barangFarmasi;
-        $barangFarmasi->alamat = $this->alamat;
-        $barangFarmasi->telpon = $this->telepon;
-        $barangFarmasi->nama_detail = $this->nama_detail;
-        $barangFarmasi->type_barangFarmasi = count($this->type_barangFarmasi) > 0 ? implode(',', $this->type_barangFarmasi) : $this->type_barangFarmasi;
+        $barangFarmasi->kd_barang = $this->kode_barang;
+        $barangFarmasi->nama_barang = $this->nama_barang;
         $barangFarmasi->save();
         session()->flash('message', 'barangFarmasi created successfully.');
 
@@ -129,14 +127,10 @@ class BarangFarmasi extends Component
     public function edit($id)
     {
         $this->isTableMode = false;
-        $barangFarmasi = GudangbarangFarmasi::where('kdbarangFarmasi', $id)->first();
+        $barangFarmasi = GudangbarangFarmasi::where('kd_barang', $id)->first();
         if ($barangFarmasi) {
-            $this->kode_barangFarmasi = $barangFarmasi->kdbarangFarmasi;
-            $this->nama_barangFarmasi = $barangFarmasi->nmbarangFarmasi;
-            $this->alamat = $barangFarmasi->alamat;
-            $this->telepon = $barangFarmasi->telpon;
-            $this->nama_detail = $barangFarmasi->nama_detail;
-            $this->type_barangFarmasi = $barangFarmasi->type_barangFarmasi;
+            $this->kode_barang = $barangFarmasi->kd_barang;
+            $this->nama_barang = $barangFarmasi->nama_barang;
         } else {
             session()->flash('error', 'barangFarmasi not found.');
         }
@@ -145,20 +139,12 @@ class BarangFarmasi extends Component
     public function update($id)
     {
         $this->validate([
-            'nama_barangFarmasi' => 'required|string|max:255',
-            'nama_detail' => 'required|string|max:255',
-            'alamat' => 'required|string|max:255',
-            'telpon' => 'required|string|max:255',
-            'type_barangFarmasi' => 'required|string|max:255',
+            'nama_barang' => 'required|string|max:255',
         ]);
 
-        $barangFarmasi = GudangbarangFarmasi::where('kdbarangFarmasi', $id)->first();
+        $barangFarmasi = GudangbarangFarmasi::where('kd_barang', $id)->first();
         if ($barangFarmasi) {
-            $barangFarmasi->nmbarangFarmasi = $this->nama_barangFarmasi;
-            $barangFarmasi->alamat = $this->alamat;
-            $barangFarmasi->telpon = $this->telepon;
-            $barangFarmasi->nama_detail = $this->nama_detail;
-            $barangFarmasi->type_barangFarmasi = $this->type_barangFarmasi;
+            $barangFarmasi->nama_barang = $this->nama_barang;
             $barangFarmasi->save();
             $this->resetForm();
             $this->isTableMode = true;
@@ -170,14 +156,14 @@ class BarangFarmasi extends Component
 
     public function deleteConfirmation($id)
     {
-        $this->kode_barangFarmasi = $id;
+        $this->kode_barang = $id;
         $this->dispatch('show-delete-confirmation');
     }
 
     #[On('deleteConfirmed')]
     public function deleteRak()
     {
-        $barangFarmasi = GudangbarangFarmasi::where('kdbarangFarmasi', $this->kode_barangFarmasi)->first();
+        $barangFarmasi = GudangbarangFarmasi::where('kd_barang', $this->kode_barang)->first();
         $barangFarmasi->delete();
         $this->dispatch('barangFarmasiDeleted');
     }
