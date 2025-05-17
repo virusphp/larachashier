@@ -4,7 +4,7 @@
 
 <head>
     <meta charset="utf-8" />
-    <title>{{ config('app.name', 'Laravel') }}</title>
+    <title>{{ $title ?? config('app.name', 'Laravel') }}</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta content="Premium Multipurpose Admin & Dashboard Template" name="description" />
     <meta content="Themesbrand" name="author" />
@@ -27,6 +27,10 @@
 
     <link href="{{ asset('themes/libs/sweetalert2/sweetalert2.min.css') }}" rel="stylesheet" type="text/css" />
 
+    {{--
+    <link href="{{ asset('themes/libs/choices.js/public/assets/styles/choices.min.css') }}" rel="stylesheet"
+        type="text/css" /> --}}
+
     @livewireStyles
 </head>
 
@@ -39,7 +43,7 @@
         {{-- End Header --}}
 
         {{-- App Menu --}}
-        @include('layouts.partials.sidebar')
+        <x-sidebar />
         {{-- End App Menu --}}
 
         <!-- Vertical Overlay-->
@@ -100,6 +104,8 @@
     <script src="{{ asset('themes/libs/feather-icons/feather.min.js') }}"></script>
     <script src="{{ asset('themes/js/pages/plugins/lord-icon-2.1.0.js') }}"></script>
     <script src="{{ asset('themes/libs/sweetalert2/sweetalert2.all.min.js') }}"></script>
+
+    <script src="{{ asset('themes/libs/choices.js/public/assets/scripts/choices.min.js') }}"></script>
 
     @stack('scripts')
 

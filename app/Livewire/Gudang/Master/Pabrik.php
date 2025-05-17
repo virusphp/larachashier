@@ -87,7 +87,6 @@ class Pabrik extends Component
     {
         $this->isTableMode = false;
         $pabrik = GudangPabrik::where('kdpabrik', $id)->first();
-        dd($pabrik);
         if ($pabrik) {
             $this->kode_pabrik = $pabrik->kdpabrik;
             $this->nama_pabrik = $pabrik->nmpabrik;

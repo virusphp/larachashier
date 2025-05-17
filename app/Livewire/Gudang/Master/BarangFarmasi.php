@@ -28,7 +28,6 @@ class BarangFarmasi extends Component
     public function render()
     {
         $barangFarmasis = $this->getbarangFarmasis();
-        // dd($barangFarmasis, $this->filterJenisObat, $this->filterStatusBarang);
         $jenisObat =  DB::table('jenis_obat')
             ->select('jns_obat as jenis_obat', 'kd_jns_obat as kode_jns_obat')
             ->where('stsaktif', 1)->get();

@@ -43,7 +43,7 @@
                         </div>
                         <input class="form-control form-control-sm" type="text" placeholder="Search..."
                             wire:model.live="search">
-                        <button wire:click="createMode()"
+                        <button wire:navigate href="{{ route('gudang.barang.form') }}"
                             class="btn btn-sm btn-success d-flex align-items-center gap-1">
                             <i class="bx bx-plus"></i><span>Tambah</span>
                         </button>
@@ -79,8 +79,9 @@
                                             <tr>
                                                 <td wire:key="item-{{ $item->kode_barang }}"
                                                     title="{{ $item->kfa_code  }}">
-                                                    {!! $item->kfa_code == null ? "<span
-                                                        class='text-secondary'>$item->kode_barang</span>" :
+                                                    {!! $item->kfa_code == null ? "<button
+                                                        class='btn btn-link text-info p-0 m-0'>$item->kode_barang</button>"
+                                                    :
                                                     $item->kode_barang !!}</td>
                                                 <td>{{ $item->nama_barang }}</td>
                                                 <td>{{ $item->satuan_besar }}</td>
@@ -128,21 +129,12 @@
                 <div class="card-body">
                     <div class="live-preview">
                         <form wire:submit="{{ !empty($kode_barang) ? 'update("'.trim($kode_barang).'")' : 'store()' }}">
-                            <div class="row mb-3">
-                                <div class="col-lg-3">
-                                    <label for="nama_barang" class="form-label">Nama Barang</label>
-                                </div>
-                                <div class="col-lg-9">
-                                    <input type="text" class="form-control @error('nama_barang') is-invalid @enderror"
-                                        id="nama_barang" name="nama_barang" placeholder="Nama barang"
-                                        wire:model="nama_bagian" autofocus>
-                                    @error('nama_barang')
-                                    <div class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </div>
-                                    @enderror
-                                </div>
-                            </div>
+
+                            <x-input wire:model="nama_barang" name="nama_barang" type="text" label="Nama Barang"
+                                placeholder="Nama barang" />
+
+                            <x-input wire:model="nama_detail" name="nama_detail" type="text" label="Nama Detail"
+                                placeholder="Nama Detail" />
 
                             <div class="row mb-3">
                                 <div class="col-lg-3">
