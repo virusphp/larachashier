@@ -29,7 +29,7 @@
                                             <input name="code_kfa" type="text" class="form-control"
                                                 placeholder="Kode kfa" wire:model="code_kfa">
                                         </div>
-                                        <div class="col-lg-9">
+                                        <div class="col-lg-9 ps-0">
                                             <input name="nama_obat_virtual" type="text" class="form-control"
                                                 placeholder="Nama Obat Virtual" wire:model="nama_obat_virtual">
 
@@ -38,42 +38,85 @@
                                 </div>
                             </div>
 
-                            <x-select-choices name="kelompok_obat" label="Kelompok Obat (Aset)"
+                            <x-select-choices id="select-choices" name="kelompok_obat" label="Kelompok Obat (Aset)"
+                                placeholder="Pilih Salah satu"
+                                :options="['makanan' => 'tahu', 'minuman' => 'orange']" />
+
+                            <x-select-choices id="select-choices" name="kelompok_kategori" label="Kelompok / Kategori"
                                 placeholder="Pilih Salah satu" :options="[]" />
 
-                            <x-select-choices name="kelompok_kategori" label="Kelompok / Kategori"
+                            <x-select-choices id="select-choices" name="jenis_barang" label="Jenis Barang"
                                 placeholder="Pilih Salah satu" :options="[]" />
 
-                            <x-select-choices name="jenis_barang" label="Jenis Barang" placeholder="Pilih Salah satu"
-                                :options="[]" />
-
-                            <x-select-choices name="golongan_obat" label="Golongan Obat" placeholder="Pilih Salah satu"
-                                :options="[]" />
-
-                            <x-select-choices name="pabrik" label="Pabrik" placeholder="Pilih Salah satu"
-                                :options="[]" />
-
-                            <x-select-choices name="pabrik" label="Pabrik" placeholder="Pilih Salah satu"
-                                :options="[]" />
-
-                            <x-select-choices name="generik" label="Generik (G/N)" placeholder="Pilih Salah satu"
-                                :options="[]" />
-
-                            <x-select-choices name="formularium" label="Formularium / Non"
+                            <x-select-choices id="select-choices" name="golongan_obat" label="Golongan Obat"
                                 placeholder="Pilih Salah satu" :options="[]" />
 
+                            <x-select-choices id="select-choices" name="pabrik" label="Pabrik"
+                                placeholder="Pilih Salah satu" :options="[]" />
 
-                            <div class="row mb-2">
+                            <x-select-choices id="select-choices" name="pabrik" label="Pabrik"
+                                placeholder="Pilih Salah satu" :options="[]" />
+
+                            <x-select-choices id="select-choices" name="generik" label="Generik (G/N)"
+                                placeholder="Pilih Salah satu" :options="[]" />
+
+                            <x-select-choices id="select-choices" name="formularium" label="Formularium / Non"
+                                placeholder="Pilih Salah satu" :options="[]" />
+
+                            <div class="row mb-1">
                                 <div class="col-lg-3">
-                                    <label for="restrik" class="form-label">Restrik</label>
+                                    <label for="restriksi" class="form-label">Restriksi</label>
                                 </div>
                                 <div class="col-lg-9">
-                                    <select class="form-select form-select-sm" data-choices name="restrik" id="restrik">
-                                        <option value="">This is a placeholder</option>
-                                        <option value="Choice 1">Choice 1</option>
-                                        <option value="Choice 2">Choice 2</option>
-                                        <option value="Choice 3">Choice 3</option>
-                                    </select>
+                                    <div class="row">
+                                        <div class="col-lg-4 ">
+                                            <x-select id="select-choices" name="restriksi" label="Restriksi"
+                                                placeholder="Pilih" :options="[]" />
+                                        </div>
+                                        <div class="col-lg-8 ps-0">
+                                            <input name="keterangan_restriksi" type="text" class="form-control"
+                                                placeholder="Keterangan Restriksi" wire:model="keterangan_restriksi">
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <x-input name="nama_product_obat_actual" type="text" label="Product Obat Actual"
+                                placeholder="Product Obat Actual" />
+
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <hr>
+                                    <h6>Kemasan Sastuan Besar (Beli - Suplier)</h6>
+                                    <hr>
+                                    <x-select-choices id="select-choices" name="satuan_besar" label="Satuan"
+                                        placeholder="Pilih Salah satu" :options="[]" />
+
+                                </div>
+                                <div class="col-md-6">
+                                    <hr>
+                                    <h6>Kemasan Satuan Kecil (Jual - Apotek)</h6>
+                                    <hr>
+                                    <div class="row mb-1">
+                                        <div class="col-lg-3">
+                                            <label for="isi" class="form-label">Isi</label>
+                                        </div>
+                                        <div class="col-lg-9">
+                                            <div class="row">
+                                                <div class="col-lg-4">
+                                                    <input name="isi" type="text" class="form-control"
+                                                        placeholder="Isi">
+                                                </div>
+                                                <div class="col-lg-8 ps-0">
+                                                    <input name="keterangan_restriksi" type="text" class="form-control"
+                                                        placeholder="Keterangan Restriksi"
+                                                        wire:model="keterangan_restriksi">
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
 
@@ -97,7 +140,7 @@
 </div>
 @script
 <script type="text/javascript">
-    const elementChoices = document.getElementById('choices-single-default');
+    const elementChoices = document.getElementById('select-choices');
     const choices = new Choices(elementChoices);
 </script>
 @endscript

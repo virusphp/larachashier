@@ -27,6 +27,8 @@
 
     <link href="{{ asset('themes/libs/sweetalert2/sweetalert2.min.css') }}" rel="stylesheet" type="text/css" />
 
+    <link href="{{ asset('themes/libs/flatpickr/flatpickr.min.css') }}" rel="stylesheet" type="text/css" />
+
     {{--
     <link href="{{ asset('themes/libs/choices.js/public/assets/styles/choices.min.css') }}" rel="stylesheet"
         type="text/css" /> --}}
@@ -104,6 +106,8 @@
     <script src="{{ asset('themes/libs/feather-icons/feather.min.js') }}"></script>
     <script src="{{ asset('themes/js/pages/plugins/lord-icon-2.1.0.js') }}"></script>
     <script src="{{ asset('themes/libs/sweetalert2/sweetalert2.all.min.js') }}"></script>
+    <script src="{{ asset('themes/libs/flatpickr/flatpickr.min.js') }}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr/dist/l10n/id.js"></script>
 
     <script src="{{ asset('themes/libs/choices.js/public/assets/scripts/choices.min.js') }}"></script>
 

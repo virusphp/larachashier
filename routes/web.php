@@ -11,6 +11,8 @@ use App\Livewire\Gudang\Master\Rak;
 use App\Livewire\Gudang\Master\Satuan;
 use App\Livewire\Gudang\Master\Suplier;
 use App\Livewire\Gudang\Master\UnitBagian;
+use App\Livewire\Gudang\Surat\CreateSpj;
+use App\Livewire\Gudang\Surat\Spj;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -39,6 +41,11 @@ Route::group(['middleware' => 'auth'], function () {
             Route::get('golongan-barang', GolonganBarang::class)->name('golongan-barang.index');
             Route::get('suplier', Suplier::class)->name('suplier.index');
             Route::get('pabrik', Pabrik::class)->name('pabrik.index');
+        });
+
+        Route::group(['namespace' => 'App\Livewire\Gudang\Surat', 'prefix' => 'surat'], function () {
+            Route::get('spj', Spj::class)->name('rak.index');
+            Route::get('spj/create', CreateSpj::class)->name('rak.create');
         });
     });
 });
