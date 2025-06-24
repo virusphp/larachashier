@@ -6,6 +6,7 @@ use Livewire\Component;
 
 class CreateSpj extends Component
 {
+    public $search = '';
     public $no_spj;
     public $nama_spj;
     public $kode_suplier;
@@ -26,6 +27,11 @@ class CreateSpj extends Component
         } else {
             $this->no_spj = 'SPJ-00001';
         }
+    }
+
+    public function suplierDipilih(string $kode): void
+    {
+        $this->kode_suplier = $kode;
     }
 
     public function resetForm()

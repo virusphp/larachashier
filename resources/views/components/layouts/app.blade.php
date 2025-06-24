@@ -29,6 +29,8 @@
 
     <link href="{{ asset('themes/libs/flatpickr/flatpickr.min.css') }}" rel="stylesheet" type="text/css" />
 
+    <link href="{{ asset('css/modal-custom.css') }}" rel="stylesheet" type="text/css" />
+
     {{--
     <link href="{{ asset('themes/libs/choices.js/public/assets/styles/choices.min.css') }}" rel="stylesheet"
         type="text/css" /> --}}
@@ -100,7 +102,13 @@
         </div>
     </div>
 
+
+    {{-- <script src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script> --}}
+    {{-- App & Plugin Script --}}
+    @vite('resources/js/app.js')
     @livewireScripts
+    <livewire:wire-elements-modal />
+
     <!-- JAVASCRIPT -->
     <script src="{{ asset('themes/libs/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
     <script src="{{ asset('themes/libs/feather-icons/feather.min.js') }}"></script>

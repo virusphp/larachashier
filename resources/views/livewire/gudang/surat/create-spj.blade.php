@@ -11,16 +11,7 @@
                 </div>
                 <div class="card-body">
                     <div class="live-preview">
-                        <form wire:submit="store()">
-                            {{-- buatkan form dengan berisi field sebagai berikut
-                            'no_spj',
-                            'nama_spj', // bisa di pakai untuk keterangan
-                            'kode_suplier',
-                            'tanggal_spj',
-                            'status',
-                            'created_by',
-                            'updated_by',
-                            --}}
+                        <form>
                             <div class="row mb-3">
                                 <div class="col-lg-3">
                                     <label for="tanggal_spj" class="form-label  ">Tanggal</label>
@@ -30,7 +21,7 @@
                                         <input type="text"
                                             class="form-control @error('tanggal_spj') is-invalid @enderror"
                                             id="tanggal_spj" name="tanggal_spj" placeholder="Tanggal SPJ (dd-mm-yyyy)"
-                                            wire:ignore value="{{ $tanggal_spj }}" autocomplete="off">
+                                            wire:model="tanggal_spj" autocomplete="off">
                                         <button id="tanggal_spj_klik" class="btn btn-outline-secondary" type="button"
                                             tabindex="-1">
                                             <i class="ri-calendar-event-line"></i>
@@ -74,7 +65,7 @@
                                     @enderror
                                 </div>
                             </div>
-                            <div class="row mb-3">
+                            <div class="row mb-3" wire:on:suplier-dipilih="suplierDipilih">
                                 <div class="col-lg-3">
                                     <label for="kode_suplier" class="form-label">Suplier</label>
                                 </div>
@@ -82,11 +73,12 @@
                                     <div class="input-group">
                                         <input type="text"
                                             class="form-control @error('kode_suplier') is-invalid @enderror"
-                                            id="kode_suplier" name="kode_suplier" placeholder="Kode Suplier"
-                                            wire:model="kode_suplier" autofocus>
+                                            id="nama_suplier" name="nama_suplier" placeholder="Kode Suplier" autofocus>
                                         {{-- cari suplier jika di klik muncul modal atau select 2 atau --}}
-                                        <input type="hidden" name="kode_suplier">
-                                        <button type="button" class="btn btn-outline-primary">
+                                        <input type="hidden" name="kode_suplier" wire:model="kode_suplier">
+                                        <button type="button"
+                                            wire:click="$dispatch('openModal', { component: 'modal.suplier-list', arguments: { title: 'Pilih Suplier'  } })"
+                                            class="btn btn-primary">
                                             <i class="ri-search-line"></i> Cari Suplier
                                         </button>
                                     </div>
@@ -113,12 +105,13 @@
 
     </div>
 </div>
+
 @push('scripts')
 
 <script>
     document.addEventListener('DOMContentLoaded', () => {
         function initFlatpickrTanggalSpj() {
-            console.log('Inisialisasi Flatpickr dijalankan'); // debug log
+            // console.log('Inisialisasi Flatpickr dijalankan'); // debug log
             const el = document.getElementById('tanggal_spj');
             if (!el || el._flatpickr) return; // Cegah duplikasi
 
